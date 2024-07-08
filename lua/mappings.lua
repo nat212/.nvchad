@@ -1,57 +1,49 @@
 require "nvchad.mappings"
+local map = vim.keymap.set
+
 ---@type MappingsTable
-local M = {}
-
-M.general = {
+local mappings = {
   n = {
-    [";"] = { ":", "enter command mode", opts = { nowait = true } },
-
+    [";"] = { ":", opts = { desc = "enter command mode", nowait = true } },
     --  format with conform
     ["<leader>fm"] = {
       function()
         require("conform").format()
       end,
-      "formatting",
+      opts = { desc = "format code" },
     },
+    ["<C-h>"] = { "<cmd><C-U>TmuxNavigateLeft<cr>", { desc = "Navigate left" } },
+    ["<C-l>"] = { "<Right>", { desc = "Move right" } },
+    ["<C-j>"] = { "<cmd><C-U>TmuxNavigateDown<cr>", { desc = "Navigate down" } },
+    ["<C-k>"] = { "<cmd><C-U>TmuxNavigateUp<cr>", { desc = "Move up" } },
+    ["L"] = { "$", { desc = "Move to end of line", noremap = true } },
+    ["H"] = { "^", { desc = "Move to beginning of line", noremap = true } },
+    ["$"] = { "L", { desc = "Move to end of paragraph", noremap = true } },
+    ["^"] = { "H", { desc = "Move to beginning of paragraph", noremap = true } },
   },
   v = {
-    [">"] = { ">gv", "indent" },
+    [">"] = { ">gv", { desc = "indent" } },
+    ["L"] = { "$", { desc = "Move to end of line", noremap = true } },
+    ["H"] = { "^", { desc = "Move to beginning of line", noremap = true } },
+    ["$"] = { "L", { desc = "Move to end of paragraph", noremap = true } },
+    ["^"] = { "H", { desc = "Move to beginning of paragraph", noremap = true } },
+  },
+  x = {
+    ["L"] = { "$", { desc = "Move to end of line", noremap = true } },
+    ["H"] = { "^", { desc = "Move to beginning of line", noremap = true } },
+    ["$"] = { "L", { desc = "Move to end of paragraph", noremap = true } },
+    ["^"] = { "H", { desc = "Move to beginning of paragraph", noremap = true } },
+  },
+  o = {
+    ["L"] = { "$", { desc = "Move to end of line", noremap = true } },
+    ["H"] = { "^", { desc = "Move to beginning of line", noremap = true } },
+    ["$"] = { "L", { desc = "Move to end of paragraph", noremap = true } },
+    ["^"] = { "H", { desc = "Move to beginning of paragraph", noremap = true } },
   },
 }
 
-local navigation_overrides = {
-  ["L"] = { "$", opts = { noremap = true } },
-  ["H"] = { "^", opts = { noremap = true } },
-  ["$"] = { "L", opts = { noremap = true } },
-  ["^"] = { "H", opts = { noremap = true } },
-}
-
-M.navigation = {
-  n = navigation_overrides,
-  x = navigation_overrides,
-  o = navigation_overrides,
-  v = navigation_overrides,
-}
-
-M.disabled = {
-  n = {
-    -- These are handled by tmux navigator
-    ["<C-h>"] = "",
-    ["<C-l>"] = "",
-    ["<C-j>"] = "",
-    ["<C-k>"] = "",
-  },
-}
-
--- M.navigation = {
---   n = {
---     ["<C-h>"] = { "<cmd><C-U>TmuxNavigateLeft<cr>", "Navigate left" },
---     ["<C-l>"] = { "<Right>", "Move right" },
---     ["<C-j>"] = { "<cmd><C-U>TmuxNavigateDown<cr>", "Navigate down" },
---     ["<C-k>"] = { "<cmd><C-U>TmuxNavigateUp<cr>", "Move up" },
---   }
--- }
-
--- more keybinds!
-
-return M
+for mode, maps in pairs(mappings) do
+  for key, val in pairs(maps) do
+    map(mode, key, val[1], val[2])
+  end
+end
