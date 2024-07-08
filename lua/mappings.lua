@@ -1,5 +1,12 @@
 require "nvchad.mappings"
+
 local map = vim.keymap.set
+local nomap = vim.keymap.del
+
+nomap("n", "<C-h>")
+nomap("n", "<C-j>")
+nomap("n", "<C-k>")
+nomap("n", "<C-l>")
 
 ---@type MappingsTable
 local mappings = {
@@ -12,14 +19,15 @@ local mappings = {
       end,
       opts = { desc = "format code" },
     },
-    ["<C-h>"] = { "<cmd><C-U>TmuxNavigateLeft<cr>", { desc = "Navigate left" } },
-    ["<C-l>"] = { "<Right>", { desc = "Move right" } },
-    ["<C-j>"] = { "<cmd><C-U>TmuxNavigateDown<cr>", { desc = "Navigate down" } },
-    ["<C-k>"] = { "<cmd><C-U>TmuxNavigateUp<cr>", { desc = "Move up" } },
     ["L"] = { "$", { desc = "Move to end of line", noremap = true } },
     ["H"] = { "^", { desc = "Move to beginning of line", noremap = true } },
     ["$"] = { "L", { desc = "Move to end of paragraph", noremap = true } },
     ["^"] = { "H", { desc = "Move to beginning of paragraph", noremap = true } },
+    ["<c-h>"] = { "<cmd>TmuxNavigateLeft<cr>", { desc = "Tmux navigate left" } },
+    ["<c-j>"] = { "<cmd>TmuxNavigateDown<cr>", { desc = "Tmux navigate down" } },
+    ["<c-k>"] = { "<cmd>TmuxNavigateUp<cr>", { desc = "Tmux navigate up" } },
+    ["<c-l>"] = { "<cmd>TmuxNavigateRight<cr>", { desc = "Tmux navigate right" } },
+    ["<c-\\>"] = { "<cmd>TmuxNavigatePrevious<cr>", { desc = "Tmux navigate previous" } },
   },
   v = {
     [">"] = { ">gv", { desc = "indent" } },
