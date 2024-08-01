@@ -9,7 +9,7 @@ require("neodev").setup {
     types = true,
   },
 }
-require("java").setup()
+-- require("java").setup()
 
 -- if you just want default config for the servers then put them in a table
 local servers = {
@@ -26,6 +26,7 @@ local servers = {
   "cmake",
   "pylsp",
   "lua_ls",
+  "csharp_ls",
 }
 
 local server_settings = {
