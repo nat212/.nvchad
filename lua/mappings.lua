@@ -28,6 +28,8 @@ local mappings = {
     ["<c-k>"] = { "<cmd>TmuxNavigateUp<cr>", { desc = "Tmux navigate up" } },
     ["<c-l>"] = { "<cmd>TmuxNavigateRight<cr>", { desc = "Tmux navigate right" } },
     ["<c-\\>"] = { "<cmd>TmuxNavigatePrevious<cr>", { desc = "Tmux navigate previous" } },
+    ["<leader>qc"] = { "<cmd>cclose<CR>", { desc = "Close quickfix window" } },
+    ["<leader>qo"] = { "<cmd>copen<CR>", { desc = "Open quickfix window" } },
   },
   v = {
     [">"] = { ">gv", { desc = "indent" } },
